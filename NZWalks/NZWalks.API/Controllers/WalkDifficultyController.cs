@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using NZWalks.API.Models.DTO;
 using NZWalks.API.Repositories.Interface;
@@ -45,6 +46,11 @@ namespace NZWalks.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddWalkDifficulty([FromBody] WalkDifficultyRequest request)
         {
+            if (!ValidateAddWalkDifficulty(request))
+            {
+                return BadRequest(ModelState);
+            }
+
             //Convert DTO to Domain
             var difficulty = new Models.Domain.WalkDifficulty()
             {
@@ -70,6 +76,11 @@ namespace NZWalks.API.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> UpdateWalkDifficulty([FromRoute] Guid id, [FromBody] WalkDifficultyRequest request)
         {
+            if (!ValidateUpdateWalkDifficulty(request))
+            {
+                return BadRequest(ModelState);
+            }
+
             var difficulty = new Models.Domain.WalkDifficulty()
             {
                 Code = request.Code
@@ -103,5 +114,51 @@ namespace NZWalks.API.Controllers
             var difficultyDTO = mapper.Map<Models.DTO.WalkDifficulty>(difficulty);
             return Ok(difficultyDTO);
         }
+
+        #region Private Methods
+
+        private bool ValidateAddWalkDifficulty(WalkDifficultyRequest request)
+        {
+            if (request == null)
+            {
+                ModelState.AddModelError(nameof(request), $"Add walk difficulty data is required.");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Code))
+            {
+                ModelState.AddModelError(nameof(request.Code), $"{nameof(request.Code)} cannot be null or empty or whitespace.");
+            }
+
+            if (ModelState.ErrorCount > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool ValidateUpdateWalkDifficulty(WalkDifficultyRequest request)
+        {
+            if (request == null)
+            {
+                ModelState.AddModelError(nameof(request), $"Add walk difficulty data is required.");
+                return false;
+            }
+
+            if (string.IsNullOrWhiteSpace(request.Code))
+            {
+                ModelState.AddModelError(nameof(request.Code), $"{nameof(request.Code)} cannot be null or empty or whitespace.");
+            }
+
+            if (ModelState.ErrorCount > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion
     }
 }
