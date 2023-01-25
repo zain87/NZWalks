@@ -42,13 +42,15 @@ namespace NZWalks.API.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddWalk(WalkRequest request)
+        public async Task<IActionResult> AddWalk([FromBody]WalkRequest request)
         {
             //convert dto to domain
             var walk = new Models.Domain.Walk()
             {
                 Name = request.Name,
-                Length = request.Length
+                Length = request.Length,
+                RegionId = request.RegionId,
+                WalkDifficultyId = request.WalkDifficultyId
             };
 
             //call repository Add method
@@ -68,6 +70,56 @@ namespace NZWalks.API.Controllers
             return CreatedAtAction(nameof(GetWalk), new { id = walkDTO.Id }, walkDTO);
         }
 
+        [HttpPut]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> UpdateWalk([FromRoute]Guid id, [FromBody]WalkRequest request)
+        {
+            //convert dto to domain
+            var walk = new Models.Domain.Walk()
+            {
+                Length = request.Length,
+                Name = request.Name,
+                RegionId = request.RegionId,
+                WalkDifficultyId = request.WalkDifficultyId
+            };
 
+            //call update method from walk repo
+            walk = await walkRepository.Update(id, walk);
+            if (walk == null)
+            {
+                return NotFound();
+            }
+
+            //convert domain back to dto
+            var walkDTO = new Models.DTO.Walk()
+            {
+                Length = walk.Length,
+                Name = walk.Name,
+                RegionId = walk.RegionId,
+                WalkDifficultyId = walk.WalkDifficultyId
+            };
+
+
+            //return result
+            return Ok(walkDTO);
+        }
+
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> DeleteWalk([FromRoute]Guid id)
+        {
+            //delete from DB
+            var walk = await walkRepository.Delete(id);
+            if (walk == null)
+            {
+                return NotFound();
+            }
+
+            //convert domain to dto
+            var walkDTO = mapper.Map<Models.DTO.Walk>(walk);
+
+            //diaplay result
+            return Ok(walkDTO);
+        }
     }
 }

@@ -27,8 +27,8 @@ namespace NZWalks.API.Repositories.Implementation
         {
             var walk = await _db.Walks.FirstOrDefaultAsync(x => x.Id == Id);
 
-            if (walk != null)
-            {
+            if (walk == null)
+            { 
                 return null;
             }
 
@@ -65,6 +65,8 @@ namespace NZWalks.API.Repositories.Implementation
 
             existingWalk.Name = walk.Name;
             existingWalk.Length = walk.Length;
+            existingWalk.RegionId = walk.RegionId;
+            existingWalk.WalkDifficultyId = walk.WalkDifficultyId;
             await _db.SaveChangesAsync();
 
             return existingWalk;
