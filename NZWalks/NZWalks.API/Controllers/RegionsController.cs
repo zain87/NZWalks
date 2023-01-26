@@ -66,10 +66,10 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> AddRegion(AddRegionRequest request)
         {
             //Validation the request
-            if (!ValidateAddRegion(request))
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ValidateAddRegion(request))
+            //{
+            //    return BadRequest(ModelState);
+            //}
             
             //Request to Domain Model
             var region = new Models.Domain.Region()
@@ -120,10 +120,10 @@ namespace NZWalks.API.Controllers
         public async Task<IActionResult> UpdateRegion([FromRoute]Guid id, [FromBody]UpdateRegionRequest region)
         {
             //Validating the region
-            if (!ValidateUpdateRegion(region))
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ValidateUpdateRegion(region))
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
             var existingRegion = new Models.Domain.Region()
             {

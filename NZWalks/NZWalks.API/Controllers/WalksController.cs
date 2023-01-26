@@ -146,15 +146,15 @@ namespace NZWalks.API.Controllers
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(request.Name))
-            {
-                ModelState.AddModelError(nameof(request.Name), $"{nameof(request.Name)} cannot be null or empty or whitespace.");
-            }
+            //if (string.IsNullOrWhiteSpace(request.Name))
+            //{
+            //    ModelState.AddModelError(nameof(request.Name), $"{nameof(request.Name)} cannot be null or empty or whitespace.");
+            //}
 
-            if (request.Length <= 0)
-            {
-                ModelState.AddModelError(nameof(request.Length), $"{nameof(request.Length)} cannot be less than or equal to zero.");
-            }
+            //if (request.Length <= 0)
+            //{
+            //    ModelState.AddModelError(nameof(request.Length), $"{nameof(request.Length)} cannot be less than or equal to zero.");
+            //}
 
             var region = await regionRepository.Get(request.RegionId);
             if (region == null)
@@ -183,15 +183,15 @@ namespace NZWalks.API.Controllers
                 return false;
             }
 
-            if (string.IsNullOrWhiteSpace(request.Name))
-            {
-                ModelState.AddModelError(nameof(request.Name), $"{nameof(request.Name)} cannot be null or empty or whitespace.");
-            }
+            //if (string.IsNullOrWhiteSpace(request.Name))
+            //{
+            //    ModelState.AddModelError(nameof(request.Name), $"{nameof(request.Name)} cannot be null or empty or whitespace.");
+            //}
 
-            if (request.Length <= 0)
-            {
-                ModelState.AddModelError(nameof(request.Length), $"{nameof(request.Length)} cannot be less than or equal to zero.");
-            }
+            //if (request.Length <= 0)
+            //{
+            //    ModelState.AddModelError(nameof(request.Length), $"{nameof(request.Length)} cannot be less than or equal to zero.");
+            //}
 
             var region = await regionRepository.Get(request.RegionId);
             if (region == null)
