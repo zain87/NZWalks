@@ -1,0 +1,56 @@
+﻿@page
+@model NZWalksWebApp.Pages.Regions.IndexModel
+
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h5 class="text-primary">List of Regions</h5>
+        </div>
+        <div class="col-6">
+
+        </div>
+    </div>
+
+    <br /><br />
+
+    <table class="table table-bordered" style="width: 100%">
+        <thead class="bg-info">
+            <tr>
+                <th>
+                    Code
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Area
+                </th>
+                <th>
+                    Latitude
+                </th>
+                <th>
+                    Longitude
+                </th>
+                <th>
+                    Population
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.Regions != null)
+            {
+                @foreach (var obj in Model.Regions)
+                {
+                    <tr>
+                        <td>@obj.Code</td>
+                        <td>@obj.Name</td>
+                        <td>@obj.Area</td>
+                        <td>@obj.Lat</td>
+                        <td>@obj.Long</td>
+                        <td>@obj.Population</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
