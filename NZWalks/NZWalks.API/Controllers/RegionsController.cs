@@ -66,7 +66,7 @@ namespace NZWalks.API.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "writer")]
+        //[Authorize(Roles = "writer")]
         public async Task<IActionResult> AddRegion(AddRegionRequest request)
         {
             //Validation the request

@@ -1,11 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
 using Newtonsoft.Json;
 using NZWalksWebApp.Model;
-using System.Collections;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace NZWalksWebApp.Pages.Regions
 {
@@ -22,15 +18,11 @@ namespace NZWalksWebApp.Pages.Regions
             apiUrl = this._configuration.GetValue<string>("WebAPIUrl");
         }
 
-        public async void OnGet()
+        public async Task<IActionResult> OnGet()
         {
             using (HttpClient client = new HttpClient())
             {
                 string endPoint = apiUrl + "/Regions";
-                //HttpRequestMessage request = new HttpRequestMessage();
-                //request.Method = HttpMethod.Get;
-                //request.RequestUri = new Uri(endPoint);
-
                 var rsp = await client.GetAsync(endPoint);
                 if (rsp.StatusCode == System.Net.HttpStatusCode.OK)
                 {
@@ -38,21 +30,7 @@ namespace NZWalksWebApp.Pages.Regions
                     Regions = JsonConvert.DeserializeObject<IEnumerable<Region>>(result);
                 }
 
-                //var query = new Dictionary<string, string>();
-                //var response = await client.GetAsync(QueryHelpers.AddQueryString(endPoint, query));
-
-                //if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                //{
-                //    var result = await response.Content.ReadAsStringAsync();
-                //    Regions = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Region>>(result);
-                //}
-
-                //if (response.StatusCode == System.Net.HttpStatusCode.OK)
-                //{
-                //    string result = await response.Content.ReadAsStringAsync();
-                //    Regions = Newtonsoft.Json.JsonConvert.DeserializeObject<IEnumerable<Region>>(result);
-                //}
-
+                return Page();
             }
         }
     }

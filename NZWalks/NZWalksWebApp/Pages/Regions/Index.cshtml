@@ -4,15 +4,15 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <h5 class="text-primary">List of Regions</h5>
+            <h5 class="text-primary my-2">List of Regions</h5>
         </div>
         <div class="col-6">
-
+            <a asp-page="Create" class="btn btn-primary">
+                Create New Region
+            </a>
         </div>
     </div>
-
-    <br /><br />
-
+    <br />
     <table class="table table-bordered" style="width: 100%">
         <thead class="bg-info">
             <tr>
@@ -45,8 +45,8 @@
                         <td>@obj.Code</td>
                         <td>@obj.Name</td>
                         <td>@obj.Area</td>
-                        <td>@obj.Lat</td>
-                        <td>@obj.Long</td>
+                        <td>@obj.Latitude</td>
+                        <td>@obj.Longitude</td>
                         <td>@obj.Population</td>
                     </tr>
                 }

@@ -1,0 +1,36 @@
+﻿@page
+@model NZWalksWebApp.Pages.Regions.CreateModel
+
+<form method="post">
+    <div class="p-3 mt-3">
+        <div class="row pb-2">
+            <h5 class="text-primary pl-3">Create Region</h5>
+            <hr />
+        </div>
+        <div class="mb-2">
+            <label asp-for="Region.Code"></label>
+            <input asp-for="Region.Code" class="form-control" />
+        </div>
+        <div class="mb-2">
+            <label asp-for="Region.Name"></label>
+            <input asp-for="Region.Name" class="form-control" />
+        </div>
+        <div class="mb-2">
+            <label asp-for="Region.Area"></label>
+            <input asp-for="Region.Area" class="form-control" />
+        </div>
+        <div class="mb-2">
+            <label asp-for="Region.Latitude"></label>
+            <input asp-for="Region.Latitude" class="form-control" />
+        </div>
+        <div class="mb-2">
+            <label asp-for="Region.Longitude"></label>
+            <input asp-for="Region.Longitude" class="form-control" />
+        </div>
+        <div class="mb-2">
+            <label asp-for="Region.Population"></label>
+            <input asp-for="Region.Population" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 150px;">Create</button>
+    </div>
+</form>
